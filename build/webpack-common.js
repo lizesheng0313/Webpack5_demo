@@ -5,11 +5,20 @@ const webpack = require('webpack')
 module.exports = {
     entry:path.join(__dirname,'..','src','main'),
     module:{
-      
+        rules:[
+            {
+                test: /\.(png|jpe?g|svg|gif)$/,
+                type: 'asset'
+            },
+            {
+                test: /\.less$/,
+                use: ['style-loader','css-loader','less-loader']
+            }
+        ]
     },
     output:{
        path:path.join(__dirname,'..','dist'),
-       filename:'[chunk][hash].js'
+       filename:'[name][hash:8].js'
     },
     plugins:[
         new webpack.DefinePlugin({

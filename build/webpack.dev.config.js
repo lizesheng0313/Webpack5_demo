@@ -5,12 +5,7 @@ const webpackCommonConf = require('./webpack-common')
 module.exports = merge(webpackCommonConf, {
     mode: 'development',
     module:{
-        rules:[
-            {
-                test: /\.(png|jpg|jpeg|gif)$/,
-                type: 'asset/resource'
-            }
-        ]
+       
     },
     devServer: {
         port: 8000,
