@@ -4,3 +4,7 @@ body {
 p{
     color:red;
 }
+span {
+    transform:translate(30px);
+    color:#fff;
+}

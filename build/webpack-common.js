@@ -1,32 +1,65 @@
 const path = require('path')
-const { CleanWebpackPlugin }  = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 module.exports = {
-    entry:path.join(__dirname,'..','src','main'),
-    module:{
-        rules:[
+    entry: path.join(__dirname, '..', 'src', 'main'),
+    module: {
+        rules: [
             {
-                test: /\.(png|jpe?g|svg|gif)$/,
-                type: 'asset'
+                test: /\.js$/,
+                exclude: /node_modules/,
+                include:path.join(__dirname,'..','src'),
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'],
+                        plugins: ["@babel/plugin-transform-runtime"]
+                    }
+                }
             },
             {
                 test: /\.less$/,
-                use: ['style-loader','css-loader','less-loader']
+                use: ['style-loader', 'css-loader', 'less-loader', { //从右到左的执行
+                    loader: 'postcss-loader',
+                    options: {
+                        postcssOptions: {
+                            plugins: [
+                                ['postcss-preset-env'] // 兼容最新css样式,添加浏览器前缀
+                            ]
+                        }
+                    }
+                }]
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader', {
+                    loader: 'postcss-loader',
+                    options: {
+                        postcssOptions: {
+                            plugins: [
+                                [
+                                    'postcss-preset-env',
+                                ]
+                            ],
+                        },
+                    }
+                }],
             }
         ]
     },
-    output:{
-       path:path.join(__dirname,'..','dist'),
-       filename:'[name][hash:8].js'
+    output: {
+        path: path.join(__dirname, '..', 'dist'),
+        filename: '[name][chunkhash:8].js',
+        // assetModuleFilename: 'images/[hash][ext][query]'
     },
-    plugins:[
+    plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV':JSON.stringify(process.env.NODE_ENV)
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         }),
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template:path.join(__dirname,'..','index.html')
+            template: path.join(__dirname, '..', 'index.html')
         })
     ]
 }
