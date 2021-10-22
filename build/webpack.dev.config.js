@@ -17,12 +17,12 @@ module.exports = merge(webpackCommonConf, {
         compress: true, // 启动gzip压缩
         open: {
             app: {
-                name: 'Google Chrome',
+                name: 'Google Chrome', // 自动打开谷歌浏览器
             }
         },
         client: {
             progress: true, // 显示打包进度条
         },
-        hot: true,
+        hot: true, // 热更新
     }
 })

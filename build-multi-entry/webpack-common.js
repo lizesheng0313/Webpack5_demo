@@ -10,7 +10,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.m?js$/,
+                test: /\.js$/,
                 exclude: /node_modules/,
                 include: path.join(__dirname, '..', 'src'),
                 use: {
@@ -24,36 +24,6 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|svg|gif)$/,
                 type: 'asset'
-            },
-            {
-                test: /\.less$/,
-                use: ['style-loader', 'css-loader', 'less-loader', {
-                    loader: 'postcss-loader',
-                    options: {
-                        postcssOptions: {
-                            plugins: [
-                                [
-                                    'postcss-preset-env',
-                                ]
-                            ],
-                        },
-                    }
-                }]
-            },
-            {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader', {
-                    loader: 'postcss-loader',
-                    options: {
-                        postcssOptions: {
-                            plugins: [
-                                [
-                                    'postcss-preset-env',
-                                ]
-                            ],
-                        },
-                    }
-                }],
             }
         ]
     },
@@ -70,7 +40,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.join(__dirname, '..', 'index.html'),
             filename:'index.html',
-            // chunks:['main']
+            chunks:['main'] // 只打包入口为main的JS  如不写 所有的入口的JS都会被引入
         }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, '..', 'error.html'),

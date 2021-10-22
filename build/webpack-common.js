@@ -1,6 +1,6 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin') // 生成html
 const webpack = require('webpack')
 module.exports = {
     entry: path.join(__dirname, '..', 'src', 'main'),
@@ -50,16 +50,16 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, '..', 'dist'),
-        filename: '[name][chunkhash:8].js',
+        filename: '[name][contenthask:8].js',
         // assetModuleFilename: 'images/[hash][ext][query]'
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) // 设置全局环境变量
         }),
-        new CleanWebpackPlugin(),
+        new CleanWebpackPlugin(), // 清除output文件
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, '..', 'index.html')
+            template: path.join(__dirname, '..', 'index.html') // 生成index.html
         })
     ]
 }

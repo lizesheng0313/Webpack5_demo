@@ -10,12 +10,46 @@ module.exports = merge(webpackCommonConf, {
                 test: /\.(png|jpe?g|svg|gif)$/,
                 type: 'asset/resource'
             },
+            {
+                test: /\.less$/,
+                use: ['style-loader', 'css-loader', 'less-loader', {
+                    loader: 'postcss-loader',
+                    options: {
+                        postcssOptions: {
+                            plugins: [
+                                [
+                                    'postcss-preset-env',
+                                ]
+                            ],
+                        },
+                    }
+                }]
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader', {
+                    loader: 'postcss-loader',
+                    options: {
+                        postcssOptions: {
+                            plugins: [
+                                [
+                                    'postcss-preset-env',
+                                ]
+                            ],
+                        },
+                    }
+                }],
+            }
         ]
     },
     devServer: {
         port: 8000,
         compress: true, // 启动gzip压缩
-        open: true, // 自动打开浏览器
+        open:{
+           app:{
+               name:'Google Chrome'
+           }
+        },
         client: {
             progress: true, // 显示打包进度条
         },

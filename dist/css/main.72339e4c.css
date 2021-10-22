@@ -1,0 +1,24 @@
+body {
+    background-color: #000;
+}
+p{
+    color:red;
+}
+span {
+    -webkit-transform:translate(30px);
+        -ms-transform:translate(30px);
+            transform:translate(30px);
+    color:#fff;
+}
+p {
+  -webkit-transform: rotate(40deg);
+  -ms-transform: rotate(40deg);
+  transform: rotate(40deg);
+  -webkit-transition: 1s all;
+  transition: 1s all;
+  width: 200px;
+}
+p span {
+  color: aliceblue;
+}
+

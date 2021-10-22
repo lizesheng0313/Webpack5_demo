@@ -24,3 +24,5 @@ aa()
 new Promise(function(resolove,reject){
    resolove(123)
 })
+
+import 'loadsh'
