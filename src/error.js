@@ -4,5 +4,5 @@ function aa() {
     return dd
 }
 let c = aa()
-let x = c * 2;
+let x = c * 2 * 3;
 console.log(x)
